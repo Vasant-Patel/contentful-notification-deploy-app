@@ -21,7 +21,12 @@ export default function CopyButton({ sdk }: { sdk: SidebarExtensionSDK }) {
   const [isLoadingTest, setLoadingTest] = useState<boolean>(false);
   const [isLoadingProd, setLoadingProd] = useState<boolean>(false);
 
+  function delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   const updateEntry = async () => {
+    const;
     const e = (await sdk.space.getEntry(sdk.ids.entry)) as Entry<Object>;
     setEntry(e);
   };
@@ -75,6 +80,7 @@ export default function CopyButton({ sdk }: { sdk: SidebarExtensionSDK }) {
   const onDeployTest = async () => {
     try {
       setLoadingTest(true);
+      await delay(5000);
       const entry = await sdk.space.getEntry(sdk.ids.entry);
       await sdk.space.publishEntry(entry);
       // refresh entry
@@ -91,6 +97,7 @@ export default function CopyButton({ sdk }: { sdk: SidebarExtensionSDK }) {
       setLoadingProd(true);
       // first publish and deploy to test
       await onDeployTest();
+      await delay(3000);
       await deployToProduction();
       sdk.notifier.success('Notifications deployed to production!');
     } catch (e: any) {
