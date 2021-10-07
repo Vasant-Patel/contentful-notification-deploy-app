@@ -73932,6 +73932,12 @@ function CopyButton(_a) {
       isLoadingProd = _f[0],
       setLoadingProd = _f[1];
 
+  function delay(ms) {
+    return new Promise(function (resolve) {
+      return setTimeout(resolve, ms);
+    });
+  }
+
   var updateEntry = function () {
     return __awaiter(_this, void 0, void 0, function () {
       var e;
@@ -74010,42 +74016,49 @@ function CopyButton(_a) {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            _a.trys.push([0, 3, 4, 5]);
+            _a.trys.push([0, 4, 5, 6]);
 
             setLoadingTest(true);
             return [4
             /*yield*/
-            , sdk.space.getEntry(sdk.ids.entry)];
+            , delay(5000)];
 
           case 1:
+            _a.sent();
+
+            return [4
+            /*yield*/
+            , sdk.space.getEntry(sdk.ids.entry)];
+
+          case 2:
             entry_1 = _a.sent();
             return [4
             /*yield*/
             , sdk.space.publishEntry(entry_1)];
 
-          case 2:
+          case 3:
             _a.sent(); // refresh entry
 
 
             updateEntry();
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 3:
+          case 4:
             e_1 = _a.sent();
             setError(e_1.toString());
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 4:
+          case 5:
             setLoadingTest(false);
             return [7
             /*endfinally*/
             ];
 
-          case 5:
+          case 6:
             return [2
             /*return*/
             ];
@@ -74060,7 +74073,7 @@ function CopyButton(_a) {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            _a.trys.push([0, 3, 4, 5]);
+            _a.trys.push([0, 4, 5, 6]);
 
             setLoadingProd(true); // first publish and deploy to test
 
@@ -74074,30 +74087,37 @@ function CopyButton(_a) {
 
             return [4
             /*yield*/
-            , deployToProduction()];
+            , delay(3000)];
 
           case 2:
+            _a.sent();
+
+            return [4
+            /*yield*/
+            , deployToProduction()];
+
+          case 3:
             _a.sent();
 
             sdk.notifier.success('Notifications deployed to production!');
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 3:
+          case 4:
             e_2 = _a.sent();
             setError(e_2.toString());
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 4:
+          case 5:
             setLoadingProd(false);
             return [7
             /*endfinally*/
             ];
 
-          case 5:
+          case 6:
             return [2
             /*return*/
             ];
@@ -74223,7 +74243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57624" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64850" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
